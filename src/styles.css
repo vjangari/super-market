@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~bootstrap/dist/css/bootstrap.min.css";
+@import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 html {
     position: relative;
@@ -10,7 +11,7 @@ html {
     margin-bottom: 60px;
   }
   .sm-pad{
-    padding-top: 15px;
+    padding-top: 4em;
   }
   .footer {
     position: absolute;
