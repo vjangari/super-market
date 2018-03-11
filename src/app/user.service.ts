@@ -2,11 +2,27 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { AppUser } from './model/app.user';
 import { Observable } from 'rxjs/Observable';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { AuthService } from './auth.service';
+import 'rxjs/observable/of';
+import { User } from 'firebase/app';
+import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-public appUser: AppUser;
-  constructor(private afStore: AngularFirestore) { 
+public appUser$: Observable<AppUser>;
+public userSubject: BehaviorSubject<firebase.User>;
+  constructor(private afStore: AngularFirestore, private authService: AuthService) { 
+    this.userSubject = new BehaviorSubject(null);
+
+    this.appUser$ = authService.firebaseUser$.switchMap(fbUser => {
+      this.userSubject.next(fbUser);
+      if(fbUser && fbUser.uid){
+        return this.get(fbUser.uid)
+      }else{
+        return Observable.of(null);
+      }
+    });
   }
 
   private setUser(appUser: AppUser){
@@ -31,8 +47,5 @@ public appUser: AppUser;
       appUser.createdDate = new Date();
       this.setUser(appUser);
     }
-    this.appUser = appUser;
-    console.log("App User:"+ this.appUser);
-  
   }
 }

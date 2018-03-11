@@ -12,9 +12,20 @@ import { User } from 'firebase/app';
 })
 export class AppComponent {
   constructor(authService: AuthService, userService: UserService) {
-    authService.appUser$.subscribe(user => {
-      if(user){
-        userService.save(user);
+    userService.appUser$.subscribe(appUser => {
+      if (!appUser) {
+        const user = userService.userSubject.getValue();
+        if (user) {
+          userService.save({
+            uid: user.uid,
+            displayName: user.displayName,
+            email: user.email,
+            phoneNumber: user.phoneNumber,
+            photoURL: user.photoURL,
+            isAdmin: false,
+            createdDate: null
+          })
+        }
       }
     });
   }

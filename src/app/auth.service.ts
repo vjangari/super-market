@@ -9,22 +9,20 @@ import 'rxjs/observable/of';
 
 @Injectable()
 export class AuthService {
-  private firebaseUser: firebase.User;
-  private user$: Observable<firebase.User>;
+  public readonly firebaseUser$: Observable<firebase.User>;
 
-  constructor(private fireAuth: AngularFireAuth, private userService: UserService) {
-    this.user$ = this.fireAuth.authState;
+  constructor(private fireAuth: AngularFireAuth) {
+    this.firebaseUser$ = this.fireAuth.authState;
   }
 
   login() {
     this.fireAuth.auth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
   }
-  logout() {
-    this.userService.appUser = null;
+  logout() { 
     this.fireAuth.auth.signOut();
   }
 
-  get appUser$(): Observable<AppUser> {
+  /*get appUser$(): Observable<AppUser> {
     return this.user$.switchMap(user => {
       if(!user){
         return Observable.of(null);
@@ -53,6 +51,6 @@ export class AuthService {
         return Observable.of(user);
       }
     });
-  }
+  }*/
 
 }
