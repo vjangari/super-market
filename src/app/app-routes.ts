@@ -8,7 +8,6 @@ import { ProductsComponent } from './products/products.component';
 import { LoginComponent } from './login/login.component';
 import { ManageProductsComponent } from './admin/manage-products/manage-products.component';
 import { ManageOrdersComponent } from './admin/manage-orders/manage-orders.component';
-import { LogoutComponent } from './logout/logout.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -18,7 +17,6 @@ export const appRoutes: Routes = [
     { path: 'products', component: ProductsComponent },
     
     { path: 'login', component: LoginComponent },
-    { path: 'logout', component: LogoutComponent },
 
     { path: 'admin/products', component: ManageProductsComponent },
     { path: 'admin/orders', component: ManageOrdersComponent },

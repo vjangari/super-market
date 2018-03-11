@@ -15,9 +15,14 @@ import { ProductsComponent } from './products/products.component';
 import { ManageProductsComponent } from './admin/manage-products/manage-products.component';
 import { ManageOrdersComponent } from './admin/manage-orders/manage-orders.component';
 import { LoginComponent } from './login/login.component'
+import { environment } from '../environments/environment';
+import { AuthService } from './auth.service';
+import { UserService } from './user.service';
 
 import { appRoutes } from './app-routes';
-import { LogoutComponent } from './logout/logout.component';
+import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,17 +35,18 @@ import { LogoutComponent } from './logout/logout.component';
     ProductsComponent,
     ManageProductsComponent,
     ManageOrdersComponent,
-    LoginComponent,
-    LogoutComponent
+    LoginComponent
   ],
   imports: [
- 
+
   BrowserModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
-    AngularFireModule
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
-  providers: [],
+  providers: [AuthService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
