@@ -15,22 +15,23 @@
             <span class="sr-only">(current)</span>
           </a>
         </li>
+        
         <li class="nav-item">
-          <a class="nav-link" routerLink="login" *ngIf="!userService.appUser">Login</a>
+          <a class="nav-link" routerLink="login" *ngIf="!appUser"> Login </a>
         </li>
 
 
       </ul>
       <ul class="navbar-nav mr-5" >
 
-        <li class="nav-item dropdown" ngbDropdown *ngIf="userService.appUser">
+        <li class="nav-item dropdown" ngbDropdown *ngIf="appUser">
           <a class="nav-link dropdown-toggle" ngbDropdownToggle id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">
-            {{userService.appUser?.displayName}}
+            {{appUser?.displayName}}
           </a>
           <div class="dropdown-menu" ngbDropdownMenu aria-labelledby="navbarDropdownMenuLink">
             <a class="dropdown-item" routerLink="my-orders">My Orders</a>
-            <ng-container *ngIf="userService.appUser?.isAdmin">
+            <ng-container *ngIf="appUser?.isAdmin">
               <a class="dropdown-item" routerLink="admin/products">Manage Products</a>
               <a class="dropdown-item" routerLink="admin/orders">Manage Orders</a>
             </ng-container>

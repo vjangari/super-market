@@ -1,8 +1,5 @@
 import { Component } from '@angular/core';
 import { UserService } from './user.service';
-import { AuthService } from './auth.service';
-import { isAdmin } from '@firebase/util';
-import { AppUser } from './model/app.user';
 import { User } from 'firebase/app';
 
 @Component({
@@ -11,21 +8,19 @@ import { User } from 'firebase/app';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(authService: AuthService, userService: UserService) {
+  constructor( userService: UserService) {
     userService.appUser$.subscribe(appUser => {
-      if (!appUser) {
-        const user = userService.userSubject.getValue();
-        if (user) {
-          userService.save({
-            uid: user.uid,
-            displayName: user.displayName,
-            email: user.email,
-            phoneNumber: user.phoneNumber,
-            photoURL: user.photoURL,
-            isAdmin: false,
-            createdDate: null
-          })
-        }
+      const user = userService.userSubject.getValue();
+      if (user) {
+        userService.save({
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          phoneNumber: user.phoneNumber,
+          photoURL: user.photoURL,
+          isAdmin: appUser ? appUser.isAdmin : false,
+          createdDate: appUser ? appUser.createdDate : null
+        })
       }
     });
   }

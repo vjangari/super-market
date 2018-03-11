@@ -10,40 +10,41 @@ import * as firebase from 'firebase/app';
 
 @Injectable()
 export class UserService {
-public appUser$: Observable<AppUser>;
-public userSubject: BehaviorSubject<firebase.User>;
-  constructor(private afStore: AngularFirestore, private authService: AuthService) { 
-    this.userSubject = new BehaviorSubject(null);
+  public readonly appUser$: Observable<AppUser>;
+  public userSubject: BehaviorSubject<firebase.User>;
 
+  constructor(private afStore: AngularFirestore, private authService: AuthService) {
+    this.userSubject = new BehaviorSubject(null);
     this.appUser$ = authService.firebaseUser$.switchMap(fbUser => {
       this.userSubject.next(fbUser);
-      if(fbUser && fbUser.uid){
+      if (fbUser && fbUser.uid) {
         return this.get(fbUser.uid)
-      }else{
+      } else {
         return Observable.of(null);
       }
     });
   }
 
-  private setUser(appUser: AppUser){
-    this.afStore.doc<AppUser>('users/'+appUser.uid).set(appUser);
+  private setUser(appUser: AppUser) {
+    this.afStore.doc<AppUser>('users/' + appUser.uid).set(appUser);
   }
-  private updateUser(appUser: Partial<AppUser>){
-    return this.afStore.doc<AppUser>('users/'+appUser.uid).update(appUser);
+  private updateUser(appUser: Partial<AppUser>) {
+    return this.afStore.doc<AppUser>('users/' + appUser.uid).update(appUser);
   }
-  public get(uid: string): Observable<AppUser>{
-     return this.afStore.doc<AppUser>('users/'+uid).valueChanges();
+  public get(uid: string): Observable<AppUser> {
+    return this.afStore.doc<AppUser>('users/' + uid).valueChanges();
   }
-  save(appUser: AppUser){
-    if(appUser.createdDate){
-        this.updateUser({
-          uid: appUser.uid,
-          displayName: appUser.displayName,
-          email: appUser.email,
-          phoneNumber: appUser.phoneNumber,
-          photoURL: appUser.photoURL
-        })
-    }else{
+
+  save(appUser: AppUser) {
+    if (appUser.createdDate) {
+      this.updateUser({
+        uid: appUser.uid,
+        displayName: appUser.displayName,
+        email: appUser.email,
+        phoneNumber: appUser.phoneNumber,
+        photoURL: appUser.photoURL
+      })
+    } else {
       appUser.createdDate = new Date();
       this.setUser(appUser);
     }

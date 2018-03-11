@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user.service';
 import { AuthService } from '../auth.service';
+import { AppUser } from '../model/app.user';
 
 @Component({
   selector: 'sm-navbar',
@@ -8,9 +9,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
-
+  public appUser: AppUser;
   constructor(private authService: AuthService, public userService: UserService) {
-    
+    this.userService.appUser$.subscribe(appUser=> this.appUser = appUser);
    }
 
   ngOnInit() {
