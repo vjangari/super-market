@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from './user.service';
 import { User } from 'firebase/app';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'sm-root',
@@ -8,9 +9,10 @@ import { User } from 'firebase/app';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor( userService: UserService) {
+  constructor( userService: UserService, router: Router) {
     userService.appUser$.subscribe(appUser => {
       const user = userService.userSubject.getValue();
+      
       if (user) {
         userService.save({
           uid: user.uid,
@@ -22,6 +24,12 @@ export class AppComponent {
           createdDate: appUser ? appUser.createdDate : null
         })
       }
+
+      let url = localStorage.getItem('redirectUrl');
+      if(!url || (url && url === '/login')){
+        url = '/home';
+      }
+      router.navigateByUrl(url);
     });
   }
 }

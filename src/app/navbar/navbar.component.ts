@@ -10,6 +10,7 @@ import { AppUser } from '../model/app.user';
 })
 export class NavbarComponent implements OnInit {
   public appUser: AppUser;
+  show = false;
   constructor(private authService: AuthService, public userService: UserService) {
     this.userService.appUser$.subscribe(appUser=> this.appUser = appUser);
    }
@@ -18,6 +19,9 @@ export class NavbarComponent implements OnInit {
   }
   logout(){
     this.authService.logout();
+  }
+  toggleMenu(){
+    this.show = !this.show;
   }
 
 }
