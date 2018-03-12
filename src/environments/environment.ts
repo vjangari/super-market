@@ -6,11 +6,11 @@
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyCOfp1V8ECHII3MXkMmzee9s5uRLE_Tbds",
+    apiKey: "",
     authDomain: "vj-oshop.firebaseapp.com",
     databaseURL: "https://vj-oshop.firebaseio.com",
     projectId: "vj-oshop",
     storageBucket: "vj-oshop.appspot.com",
-    messagingSenderId: "733545871222"
+    messagingSenderId: ""
   }
 };

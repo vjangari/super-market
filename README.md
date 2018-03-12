@@ -1,6 +1,6 @@
 # SuperMarket
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.3.
+This project is build with Angular 5.x, Ancular CLI 1.7.3, Firebase, Firestore, Bootstrap 4
 
 ## Demo
 
