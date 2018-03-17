@@ -1,3 +1,6 @@
 <p>
-  products works!
+  Categories:
 </p>
+<ul>
+  <li *ngFor="let c of categories$ | async">{{c.name}}</li>
+</ul>

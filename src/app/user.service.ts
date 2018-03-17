@@ -18,7 +18,7 @@ export class UserService {
     this.appUser$ = authService.firebaseUser$.switchMap(fbUser => {
       this.userSubject.next(fbUser);
       if (fbUser && fbUser.uid) {
-        return this.get(fbUser.uid)
+        return this.get(fbUser.uid);
       } else {
         return Observable.of(null);
       }
@@ -43,7 +43,7 @@ export class UserService {
         email: appUser.email,
         phoneNumber: appUser.phoneNumber,
         photoURL: appUser.photoURL
-      })
+      });
     } else {
       appUser.createdDate = new Date();
       this.setUser(appUser);

@@ -12,9 +12,9 @@ import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { MyOrdersComponent } from './my-orders/my-orders.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { ProductsComponent } from './products/products.component';
-import { ManageProductsComponent } from './admin/manage-products/manage-products.component';
-import { ManageOrdersComponent } from './admin/manage-orders/manage-orders.component';
-import { LoginComponent } from './login/login.component'
+import { AdminProductsComponent } from './admin/products/products.component';
+import { AdminOrdersComponent } from './admin/orders/orders.component';
+import { LoginComponent } from './login/login.component';
 import { environment } from '../environments/environment';
 import { AuthService } from './auth.service';
 import { UserService } from './user.service';
@@ -22,6 +22,8 @@ import { UserService } from './user.service';
 import { appRoutes } from './app-routes';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { CategoryComponent } from './category/category.component';
+import { CategoryService } from './category.service';
 
 @NgModule({
   declarations: [
@@ -33,20 +35,21 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     MyOrdersComponent,
     CheckoutComponent,
     ProductsComponent,
-    ManageProductsComponent,
-    ManageOrdersComponent,
-    LoginComponent
+    AdminProductsComponent,
+    AdminOrdersComponent,
+    LoginComponent,
+    CategoryComponent
   ],
   imports: [
 
-  BrowserModule,
+    BrowserModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [AuthService, UserService],
+  providers: [AuthService, UserService, CategoryService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
