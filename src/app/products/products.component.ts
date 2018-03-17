@@ -9,7 +9,7 @@ import { Category } from '../model/category';
 })
 export class ProductsComponent implements OnInit {
   categories$;
-  category;
+  category: Category;
   constructor(private categoryService: CategoryService) { }
 
 
@@ -17,7 +17,7 @@ export class ProductsComponent implements OnInit {
   ngOnInit() {
     this.categories$ = this.categoryService.getCategories();
   }
-  changeCategory(category?: Category){
+  changeCategory(category?: Category) {
     this.category = category;
   }
 }

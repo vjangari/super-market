@@ -1,8 +1,7 @@
-<p>
-  Categories:
-</p>
-
 <ul class="list-group">
-    <li class="list-group-item list-group-item-action" [class.active]="!category" (click)="changeCategory()">All Categories</li>
-  <li class="list-group-item list-group-item-action" [class.active]="category && category.name === c.name" (click)="changeCategory(c)" *ngFor="let c of categories$ | async">{{c.name}}</li>
+
+  <li class="list-group-item list-group-item-action" [class.active]="!category" (click)="changeCategory()">All Categories</li>
+
+  <li class="list-group-item list-group-item-action" [class.active]="category && category.name === c.name" (click)="changeCategory(c)"
+    *ngFor="let c of categories$ | async">{{c.name}}</li>
 </ul>
