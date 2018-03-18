@@ -22,8 +22,11 @@ import { UserService } from './user.service';
 import { appRoutes } from './app-routes';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { CategoryComponent } from './category/category.component';
+import { CategoryComponent } from './product-filter/category/category.component';
 import { CategoryService } from './category.service';
+import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ProductService } from './product.service';
 
 @NgModule({
   declarations: [
@@ -38,18 +41,19 @@ import { CategoryService } from './category.service';
     AdminProductsComponent,
     AdminOrdersComponent,
     LoginComponent,
-    CategoryComponent
+    CategoryComponent,
+    ProductFormComponent
   ],
   imports: [
-
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(appRoutes),
     NgbModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [AuthService, UserService, CategoryService],
+  providers: [AuthService, UserService, CategoryService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

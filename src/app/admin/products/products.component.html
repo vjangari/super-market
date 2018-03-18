@@ -1,3 +1,27 @@
 <p>
-  manage-products works!
+  <a class="btn btn-primary" routerLink="./add">Add Product</a>
 </p>
+
+<div class="row">
+  <div class="col">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead class="thead-light">
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let p of products$| async">
+            <td>{{p.title}}</td>
+            <td>{{p.price | currency:'USD'}}</td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

@@ -1,7 +1,6 @@
-<ul class="list-group">
-
-  <li class="list-group-item list-group-item-action" [class.active]="!category" (click)="changeCategory()">All Categories</li>
-
-  <li class="list-group-item list-group-item-action" [class.active]="category && category.name === c.name" (click)="changeCategory(c)"
-    *ngFor="let c of categories$ | async">{{c.name}}</li>
-</ul>
+<div class="row">
+    <div class="col-2 col-md-3 col-sm-12">
+        <sm-category> </sm-category>
+    </div>
+    <div class="col"></div>
+</div>
